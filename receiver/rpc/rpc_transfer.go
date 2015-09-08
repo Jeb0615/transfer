@@ -21,7 +21,7 @@ type TransferResp struct {
 }
 
 func (t *TransferResp) String() string {
-	s := fmt.Sprintf("TransferResp total=%d, err_invalid=%d, latency=%dms",
+	s := fmt.Sprintf("TransferResp total=%d, err_invalid=%d, latency=%dus",
 		t.Total, t.ErrInvalid, t.Latency)
 	if t.Msg != "" {
 		s = fmt.Sprintf("%s, msg=%s", s, t.Msg)
@@ -144,7 +144,7 @@ func RecvMetricValues(args []*cmodel.MetricValue, reply *cmodel.TransferResponse
 
 	reply.Message = "ok"
 	reply.Total = len(args)
-	reply.Latency = (time.Now().UnixNano() - start.UnixNano()) / 1000000
+	reply.Latency = (time.Now().UnixNano() - start.UnixNano()) / 1000
 
 	return nil
 }
